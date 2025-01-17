@@ -1,0 +1,6 @@
+@LandMarkAPI_HostAddress = http://localhost:5142
+
+GET {{LandMarkAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
