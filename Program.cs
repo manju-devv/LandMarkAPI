@@ -1,13 +1,20 @@
 
 using Microsoft.EntityFrameworkCore;
-using LankMarkAPI.Database;
 using Microsoft.AspNetCore.Cors;
+using LandMarkAPI.Repositories;
+using LandMarkAPI.Database;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddDbContext<DatabaseConnection>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+builder.Services.AddScoped<DatabaseConnection>();
+builder.Services.AddScoped<IRepository, Repository>();
+
+
+
 
 builder.Services.AddControllers();
 
