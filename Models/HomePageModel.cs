@@ -11,5 +11,6 @@
         public TimeSpan CreatedTime { get; set; }
         public int UpdatedBy { get; set; }
         public TimeSpan UpdatedAt { get; set; }
+        public string? image { get; set; }
     }
 }

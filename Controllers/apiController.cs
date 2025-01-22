@@ -1,5 +1,6 @@
 ﻿
 
+using LandMarkAPI.Handlers;
 using LandMarkAPI.Repositories;
 using LankMarkAPI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,152 +11,125 @@ namespace LandMarkAPI.Controllers
     [Route("[controller]")]
     public class apiController : ControllerBase
     {
-        private readonly IRepository _repository;
+        private readonly UserHandler _UserHandler;
+        private readonly MenuBarHandler _menuBarHandler;
+        private readonly HomePageHandler _HomePageHandler;
+        private readonly FeatureHandler _featureHandler;
+        private readonly FeatureToolsHandler _featureToolsHandler;
+        private readonly PriceHandler _priceHandler;
+        private readonly PricePlanHandler _pricePlanHandler;
+        private readonly PlanFeaturesHandler _planFeaturesHandler;
+        private readonly TestimonialHandler _testimonialHandler;
+        private readonly TestimonialRolesHandler _testimonialRolesHandler;
+        private readonly FooterHandler _footerHandler;
+        private readonly FooterDetailsHandler _footerDetailsHandler;
+        private readonly CopyWrightHandler _copyWrightHandler;
 
-        public apiController(IRepository repository)
+        public apiController(UserHandler userHandler,
+               MenuBarHandler menuBarHandler,
+               HomePageHandler homePageHandler,
+               FeatureHandler featureHandler,
+               FeatureToolsHandler featureToolsHandler,
+               PriceHandler priceHandler,
+               PricePlanHandler pricePlanHandler,
+               PlanFeaturesHandler planFeaturesHandler,
+               TestimonialHandler testimonialHandler,
+               TestimonialRolesHandler testimonialRolesHandler,
+               FooterHandler footerHandler,
+               FooterDetailsHandler footerDetailsHandler,
+               CopyWrightHandler copyWrightHandler
+            )
         {
-            _repository = repository;
+            _UserHandler = userHandler;
+            _menuBarHandler = menuBarHandler;
+            _HomePageHandler = homePageHandler;
+            _featureHandler = featureHandler;
+            _featureToolsHandler = featureToolsHandler;
+            _priceHandler = priceHandler;
+            _pricePlanHandler = pricePlanHandler;
+            _planFeaturesHandler = planFeaturesHandler;
+            _testimonialHandler = testimonialHandler;
+            _testimonialRolesHandler = testimonialRolesHandler;
+            _footerHandler = footerHandler;
+            _footerDetailsHandler = footerDetailsHandler;
+            _copyWrightHandler = copyWrightHandler;
         }
 
         [HttpGet("UserPrivilages")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> GetUserPrivilages()
         {
-            try
-            {
-                var data = await _repository.GetUserPrivilagesDataAsync();
-                if(data == null || !data.Any())
-                {
-                    return NotFound(new {message = "data of UserPrivilages could not be found!",StatusCode = 400});
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = "Something went wrong & can't get the UserPrivilages data!",error = ex.Message});
-            }
+            var user = await _UserHandler.GetUserPrivilagesDataAsync();
+            return Ok(user);
         }
+
+
         [HttpGet("MenuBar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetMenuBar()
         {
-            try
-            {
-                var data = await _repository.GetMenuBarDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of MenuBar could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, $"something went wrong: {e.Message}");
-            }
+            var data = await _menuBarHandler.GetMenuBarDataAsync();
+            return Ok(data);
         }
+
+
         [HttpGet("HomePage")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetHomePage()
-        {
-            try
-            {
-                var data = await _repository.GetHomePageDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of HomePage could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, $"Internal Server Error: {e.Message}");
-            }
+        { 
+            var data = await _HomePageHandler.GetHomePageDataAsync();
+            return Ok(data);
         }
+
+
         [HttpGet("Features")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetFeatures()
         {
-            try
-            {
-                var data = await _repository.GetFeaturesDataAsyc();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of Features could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal Server Error: {ex.Message}");
-            }
+            var data = await _featureHandler.GetFeaturesDataAsyc();
+            return Ok(data);
         }
+
+
         [HttpGet("FeatureTools")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetFeatureTools()
         {
-            try
-            {
-                var data = await _repository.GetFeatureToolsDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of FeatureTools could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal Server Error: {ex.Message}");
-            }
+            var data = await _featureToolsHandler.GetFeatureToolsDataAsync();
+            return Ok(data);
         }
+
+
         [HttpGet("Price")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetPrice()
         {
-            try
-            {
-                var data = await _repository.GetPriceDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of Price could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"internal server error: {ex.Message}");
-            }
+            var data = await _priceHandler.GetPriceDataAsync();
+            return Ok(data);
+
         }
+
+
         [HttpGet("PricePlan")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetPricePlan()
         {
-            try
-            {
-                var data = await _repository.GetPricePlanDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of PricePlan could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            var data = await _pricePlanHandler.GetPricePlanDataAsync();
+            return Ok(data);
         }
 
         [HttpGet("PlanFeatures")]
@@ -164,119 +138,64 @@ namespace LandMarkAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetPlanFeatures()
         {
-            try
-            {
-                var data = await _repository.GetPlanFeaturesDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of PlanFeatures could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            var data = await _planFeaturesHandler.GetPlanFeaturesDataAsync();
+            return Ok(data);
         }
+
+
         [HttpGet("Testimonial")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetTestimonial()
         {
-            try
-            {
-                var data = await _repository.GetTestimonialDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of Testimonials could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            var data = await _testimonialHandler.GetTestimonialDataAsync();
+            return Ok(data);
+
         }
+
+
         [HttpGet("TestimonialRoles")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetTestimonialRoles()
         {
-            try
-            {
-                var data = await _repository.GetTestimonialRolesDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of TestimonialsRoles could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            var data = await _testimonialRolesHandler.GetTestimonialRolesDataAsync();
+            return Ok(data);
         }
+
+
         [HttpGet("Footer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetFooter()
         {
-            try
-            {
-                var data = await _repository.GetFooterDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of Footer could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            var data = await _footerHandler.GetFooterDataAsync();
+            return Ok(data);
         }
+
+
         [HttpGet("FooterDetails")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetFooterDetails()
         {
-            try
-            {
-                var data = await _repository.GetFooterDetailsDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of FooterDetails could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            var data = await _footerDetailsHandler.GetFooterDetailsDataAsync();
+            return Ok(data);
         }
+
+
         [HttpGet("CopyWright")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCopyWright()
         {
-            try
-            {
-                var data = await _repository.GetCopyWrightDataAsync();
-                if (data == null || !data.Any())
-                {
-                    return NotFound(new { message = "data of CopyWrights could not be found!", StatusCode = 400 });
-                }
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });
-            }
+            var data = await _copyWrightHandler.GetCopyWrightDataAsync();
+            return Ok(data);
         }
     }
 }

@@ -12,125 +12,232 @@ namespace LandMarkAPI.Repositories
     public class Repository: IRepository
     {
         private readonly DatabaseConnection _DatabaseConnection;
-        public Repository(DatabaseConnection databaseConnection)
+        private readonly ILogger<Repository> _logger;
+        public Repository(DatabaseConnection databaseConnection, ILogger<Repository> logger)
         {
             _DatabaseConnection = databaseConnection;
+            _logger = logger;
         }
         public async Task<List<UserPrivilagesModel>> GetUserPrivilagesDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetUserPrivilages]";
-                var result = await connection.QueryAsync<UserPrivilagesModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    
+                    var query = "[dbo].[GetUserPrivilages]";
+                    var result = await connection.QueryAsync<UserPrivilagesModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching User Privilages Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<MenuBarModel>> GetMenuBarDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetMenuBar]";
-                var result = await connection.QueryAsync<MenuBarModel>(query,commandType:System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetMenuBar]";
+                    var result = await connection.QueryAsync<MenuBarModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Menu Bar Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<HomePageModel>> GetHomePageDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetHomePage]";
-                var result = await connection.QueryAsync<HomePageModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetHomePage]";
+                    var result = await connection.QueryAsync<HomePageModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Home Page Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<FeaturesModel>> GetFeaturesDataAsyc()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetFeatures]";
-                var result = await connection.QueryAsync<FeaturesModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetFeatures]";
+                    var result = await connection.QueryAsync<FeaturesModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Features Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<FeatureToolsModel>> GetFeatureToolsDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetFeatureTools]";
-                var result = await connection.QueryAsync<FeatureToolsModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetFeatureTools]";
+                    var result = await connection.QueryAsync<FeatureToolsModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Feature Tools Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<PriceModel>> GetPriceDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetPrice]";
-                var result = await connection.QueryAsync<PriceModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetPrice]";
+                    var result = await connection.QueryAsync<PriceModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Price Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<PricePlanModel>> GetPricePlanDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetPricePlan]";
-                var result = await connection.QueryAsync<PricePlanModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetPricePlan]";
+                    var result = await connection.QueryAsync<PricePlanModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Price Plan Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<PlanFeaturesModel>> GetPlanFeaturesDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetPlanFeatures]";
-                var result = await connection.QueryAsync<PlanFeaturesModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetPlanFeatures]";
+                    var result = await connection.QueryAsync<PlanFeaturesModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Plan Features Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<TestimonialModel>> GetTestimonialDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetTestimonials]";
-                var result = await connection.QueryAsync<TestimonialModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetTestimonials]";
+                    var result = await connection.QueryAsync<TestimonialModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Testimonial Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<TestimonialRolesModel>> GetTestimonialRolesDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetTestimonialRoles]";
-                var result = await connection.QueryAsync<TestimonialRolesModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetTestimonialRoles]";
+                    var result = await connection.QueryAsync<TestimonialRolesModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Testimonial Roles Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<FooterModel>> GetFooterDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetFooter]";
-                var result = await connection.QueryAsync<FooterModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetFooter]";
+                    var result = await connection.QueryAsync<FooterModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Footer Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<FooterDetailsModel>> GetFooterDetailsDataAsync()
         {
-            using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetFooterDetails]";
-                var result = await connection.QueryAsync<FooterDetailsModel>(query, commandType: System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetFooterDetails]";
+                    var result = await connection.QueryAsync<FooterDetailsModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Footer Details Data. \n error:{ex.Message}");
+                throw;
             }
         }
         public async Task<List<CopyWrightModel>> GetCopyWrightDataAsync()
         {
-            using(var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+            try
             {
-                var query = "[dbo].[GetCopyWrights]";
-                var result  = await connection.QueryAsync<CopyWrightModel>(query,commandType:System.Data.CommandType.StoredProcedure);
-                return result.AsList();
+                using (var connection = new SqlConnection(_DatabaseConnection.ConnectionString))
+                {
+                    var query = "[dbo].[GetCopyWrights]";
+                    var result = await connection.QueryAsync<CopyWrightModel>(query, commandType: System.Data.CommandType.StoredProcedure);
+                    return result.AsList();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occured while connecting DB & fetching Copy Wright Data. \n error:{ex.Message}");
+                throw;
             }
         }
     }
