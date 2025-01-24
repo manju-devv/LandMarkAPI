@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using LankMarkAPI.Models;
+﻿using LankMarkAPI.Models;
 
 namespace LandMarkAPI.Repositories
 {
-    public interface IRepository
+    public interface ILandmarkRepository
     {
         Task<List<UserPrivilagesModel>> GetUserPrivilagesDataAsync();
         Task<List<MenuBarModel>> GetMenuBarDataAsync();

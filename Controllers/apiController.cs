@@ -1,7 +1,5 @@
-﻿
-
-using LandMarkAPI.Handlers;
-using LandMarkAPI.Repositories;
+﻿using LandMarkAPI.Handlers;
+using LandMarkAPI.Models;
 using LankMarkAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,9 +54,9 @@ namespace LandMarkAPI.Controllers
         }
 
         [HttpGet("UserPrivilages")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UserPrivilagesModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetUserPrivilages()
         {
             var user = await _UserHandler.GetUserPrivilagesDataAsync();
@@ -67,9 +65,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("MenuBar")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(List<MenuBarModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetMenuBar()
         {
             var data = await _menuBarHandler.GetMenuBarDataAsync();
@@ -78,9 +76,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("HomePage")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(List<HomePageModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetHomePage()
         { 
             var data = await _HomePageHandler.GetHomePageDataAsync();
@@ -89,9 +87,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("Features")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(List<FeaturesModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetFeatures()
         {
             var data = await _featureHandler.GetFeaturesDataAsyc();
@@ -100,9 +98,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("FeatureTools")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FeatureToolsModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetFeatureTools()
         {
             var data = await _featureToolsHandler.GetFeatureToolsDataAsync();
@@ -111,9 +109,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("Price")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<PriceModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetPrice()
         {
             var data = await _priceHandler.GetPriceDataAsync();
@@ -123,9 +121,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("PricePlan")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<PricePlanModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetPricePlan()
         {
             var data = await _pricePlanHandler.GetPricePlanDataAsync();
@@ -133,9 +131,9 @@ namespace LandMarkAPI.Controllers
         }
 
         [HttpGet("PlanFeatures")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<PlanFeaturesModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetPlanFeatures()
         {
             var data = await _planFeaturesHandler.GetPlanFeaturesDataAsync();
@@ -144,9 +142,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("Testimonial")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TestimonialModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetTestimonial()
         {
             var data = await _testimonialHandler.GetTestimonialDataAsync();
@@ -156,9 +154,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("TestimonialRoles")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(List<TestimonialRolesModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetTestimonialRoles()
         {
             var data = await _testimonialRolesHandler.GetTestimonialRolesDataAsync();
@@ -167,9 +165,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("Footer")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(List<FooterModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetFooter()
         {
             var data = await _footerHandler.GetFooterDataAsync();
@@ -178,9 +176,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("FooterDetails")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(List<FooterDetailsModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetFooterDetails()
         {
             var data = await _footerDetailsHandler.GetFooterDetailsDataAsync();
@@ -189,9 +187,9 @@ namespace LandMarkAPI.Controllers
 
 
         [HttpGet("CopyWright")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(List<CopyWrightModel>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
         public async Task<IActionResult> GetCopyWright()
         {
             var data = await _copyWrightHandler.GetCopyWrightDataAsync();

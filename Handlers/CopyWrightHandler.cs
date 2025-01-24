@@ -1,14 +1,13 @@
 ﻿using Dapper;
 using LankMarkAPI.Models;
-using LandMarkAPI.Database;
 using LandMarkAPI.Repositories;
 
 namespace LandMarkAPI.Handlers
 {
     public class CopyWrightHandler
     {
-        private readonly IRepository _repository;
-        public CopyWrightHandler(IRepository repository)
+        private readonly ILandmarkRepository _repository;
+        public CopyWrightHandler(ILandmarkRepository repository)
         {
             _repository = repository;
         }

@@ -20,20 +20,30 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.Services.AddScoped<DatabaseConnection>();
-builder.Services.AddScoped<IRepository, Repository>();
-builder.Services.AddScoped<UserHandler>();
-builder.Services.AddScoped<MenuBarHandler>();
-builder.Services.AddScoped<HomePageHandler>();
-builder.Services.AddScoped<FeatureHandler>();
-builder.Services.AddScoped<FeatureToolsHandler>();
-builder.Services.AddScoped<PriceHandler>();
-builder.Services.AddScoped<PricePlanHandler>();
-builder.Services.AddScoped<PlanFeaturesHandler>();
-builder.Services.AddScoped<TestimonialHandler>();
-builder.Services.AddScoped<TestimonialRolesHandler>();
-builder.Services.AddScoped<FooterHandler>();
-builder.Services.AddScoped<FooterDetailsHandler>();
-builder.Services.AddScoped<CopyWrightHandler>();
+builder.Services.AddScoped<ILandmarkRepository, LandmarkRepository>();
+//builder.Services.AddScoped<UserHandler>();
+//builder.Services.AddScoped<MenuBarHandler>();
+//builder.Services.AddScoped<HomePageHandler>();
+//builder.Services.AddScoped<FeatureHandler>();
+//builder.Services.AddScoped<FeatureToolsHandler>();
+//builder.Services.AddScoped<PriceHandler>();
+//builder.Services.AddScoped<PricePlanHandler>();
+//builder.Services.AddScoped<PlanFeaturesHandler>();
+//builder.Services.AddScoped<TestimonialHandler>();
+//builder.Services.AddScoped<TestimonialRolesHandler>();
+//builder.Services.AddScoped<FooterHandler>();
+//builder.Services.AddScoped<FooterDetailsHandler>();
+//builder.Services.AddScoped<CopyWrightHandler>();
+
+var handlerAssembly = typeof(Program).Assembly;
+var handlerTypes = handlerAssembly.GetTypes()
+    .Where(t => t.Name.EndsWith("Handler") && t.IsClass && !t.IsAbstract);
+
+foreach (var handlerType in handlerTypes)
+{
+    Console.WriteLine(handlerType);
+    builder.Services.AddScoped(handlerType);
+}
 
 
 

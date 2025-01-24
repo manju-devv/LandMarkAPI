@@ -1,18 +1,12 @@
-﻿using Dapper;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using LankMarkAPI.Models;
-using LandMarkAPI.Database;
+﻿using LankMarkAPI.Models;
 using LandMarkAPI.Repositories;
 
 namespace LandMarkAPI.Handlers
 {
     public class TestimonialHandler
     {
-        private readonly IRepository _repository;
-        public TestimonialHandler(IRepository repository)
+        private readonly ILandmarkRepository _repository;
+        public TestimonialHandler(ILandmarkRepository repository)
         {
             _repository = repository;
         }

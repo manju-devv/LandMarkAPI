@@ -1,19 +1,13 @@
-﻿using Dapper;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using LankMarkAPI.Models;
-using LandMarkAPI.Database;
+﻿using LankMarkAPI.Models;
 using LandMarkAPI.Repositories;
-using Microsoft.AspNetCore.Http.HttpResults;
+
 
 namespace LandMarkAPI.Handlers
 {
     public class UserHandler
     {
-        private readonly IRepository _repository;
-        public UserHandler(IRepository repo)
+        private readonly ILandmarkRepository _repository;
+        public UserHandler(ILandmarkRepository repo)
         {
             _repository = repo;
         }

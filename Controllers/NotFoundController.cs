@@ -9,7 +9,7 @@ namespace LankMarkAPI.Controllers
         [HttpGet]
         public ActionResult HandleUndefinedRoutes()
         {
-            return NotFound(new {messsage = "page not found Maybe dont exist!!"});
+            return NotFound(new {messsage = "Incorrect url requested!! page not found Maybe dont exist!!"});
         }
     }
 }

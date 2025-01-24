@@ -4,15 +4,14 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using LankMarkAPI.Models;
-using LandMarkAPI.Database;
 using LandMarkAPI.Repositories;
 
 namespace LandMarkAPI.Handlers
 {
     public class HomePageHandler
     {
-        private readonly IRepository _repository;
-        public HomePageHandler(IRepository repository)
+        private readonly ILandmarkRepository _repository;
+        public HomePageHandler(ILandmarkRepository repository)
         {
             _repository = repository;
         }

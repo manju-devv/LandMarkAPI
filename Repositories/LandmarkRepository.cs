@@ -1,7 +1,4 @@
 ﻿using Dapper;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using LankMarkAPI.Models;
 using LandMarkAPI.Database;
@@ -9,11 +6,11 @@ using LandMarkAPI.Database;
 
 namespace LandMarkAPI.Repositories
 {
-    public class Repository: IRepository
+    public class LandmarkRepository: ILandmarkRepository 
     {
         private readonly DatabaseConnection _DatabaseConnection;
-        private readonly ILogger<Repository> _logger;
-        public Repository(DatabaseConnection databaseConnection, ILogger<Repository> logger)
+        private readonly ILogger<ILandmarkRepository> _logger;
+        public LandmarkRepository(DatabaseConnection databaseConnection, ILogger<ILandmarkRepository> logger)
         {
             _DatabaseConnection = databaseConnection;
             _logger = logger;

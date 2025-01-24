@@ -1,18 +1,13 @@
-﻿using Dapper;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using LankMarkAPI.Models;
-using LandMarkAPI.Database;
+﻿using LankMarkAPI.Models;
 using LandMarkAPI.Repositories;
+
 
 namespace LandMarkAPI.Handlers
 {
     public class PricePlanHandler
     {
-        private readonly IRepository _repository;
-        public PricePlanHandler(IRepository repository)
+        private readonly ILandmarkRepository _repository;
+        public PricePlanHandler(ILandmarkRepository repository)
         {
             _repository = repository;
         }
@@ -21,7 +16,8 @@ namespace LandMarkAPI.Handlers
             var data = await _repository.GetPricePlanDataAsync();
             if (data == null || !data.Any())
             {
-                throw new Exception("No data found in the table PricePlan!!");
+                //return NotFound(new ErrorModel { Message = "No data found in the table PricePlan!" });
+                throw new Exception("No data found in the table PricePlan!");
             }
             return data;
         }

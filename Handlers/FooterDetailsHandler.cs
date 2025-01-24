@@ -1,14 +1,12 @@
-﻿using Dapper;
-using LankMarkAPI.Models;
-using LandMarkAPI.Database;
+﻿using LankMarkAPI.Models;
 using LandMarkAPI.Repositories;
 
 namespace LandMarkAPI.Handlers
 {
     public class FooterDetailsHandler
     {
-        private readonly IRepository _repository;
-        public FooterDetailsHandler(IRepository repository)
+        private readonly ILandmarkRepository _repository;
+        public FooterDetailsHandler(ILandmarkRepository repository)
         {
             _repository = repository;
         }

@@ -1,9 +1,4 @@
-﻿using Dapper;
-//using System.Data.SqlClient;
-//using System.Threading.Tasks;
-//using System.Collections.Generic;
-//using Microsoft.Data.SqlClient;
-using LankMarkAPI.Models;
+﻿using LankMarkAPI.Models;
 using LandMarkAPI.Database;
 using LandMarkAPI.Repositories;
 
@@ -11,8 +6,8 @@ namespace LandMarkAPI.Handlers
 {
     public class FooterHandler
     {
-        private readonly IRepository _repository;
-        public FooterHandler(IRepository repository)
+        private readonly ILandmarkRepository _repository;
+        public FooterHandler(ILandmarkRepository repository)
         {
             _repository = repository;
         }

@@ -1,18 +1,12 @@
-﻿using Dapper;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
-using LankMarkAPI.Models;
-using LandMarkAPI.Database;
+﻿using LankMarkAPI.Models;
 using LandMarkAPI.Repositories;
 
 namespace LandMarkAPI.Handlers
 {
     public class PriceHandler
     {
-        private readonly IRepository _repository;
-        public PriceHandler(IRepository repository)
+        private readonly ILandmarkRepository _repository;
+        public PriceHandler(ILandmarkRepository repository)
         {
             _repository = repository;
         }
